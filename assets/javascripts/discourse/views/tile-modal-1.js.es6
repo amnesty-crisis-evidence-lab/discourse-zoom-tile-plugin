@@ -16,6 +16,10 @@ export default ModalBodyView.extend({
     modalHtml += "<img src='" + $('.tile7').attr('src') + "' class='tile7 tile'/>";
     modalHtml += "<img src='" + $('.tile8').attr('src') + "' class='tile8 tile'/>";
     $('#tile-modal-1').html(modalHtml);
+
+    //override discourse's style so we have biggest view possible
+    $('#tile-modal-1').closest('.modal-body').css('max-height', 'none');
+    $('#tile-modal-1').closest('.modal-inner-container').css('max-width', '90vh');
   }
 
 });

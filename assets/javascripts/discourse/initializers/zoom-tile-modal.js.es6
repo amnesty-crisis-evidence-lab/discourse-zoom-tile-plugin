@@ -3,30 +3,87 @@ import showModal from 'discourse/lib/show-modal';
 
 function initializeModal(api) {
 	api.decorateCooked($elem => {
-		// Enable zoom on mobile device only.
-		// Discourse add class = 'mobile-device' to <html> on mobile device
-		if (!$('html').hasClass('mobile-device')) {
-			return;
-		}
-
 		//add zoomin icon
 		//use css in discourse admin to put this icon on tile images
-		$elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon" aria-hidden="true"></i>');
+		$elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon1" aria-hidden="true"></i>');
+		$elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon2" aria-hidden="true"></i>');
+		$elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon3" aria-hidden="true"></i>');
+
+		var tileGroup1 = [1, 2, 7, 8],
+		tileGroup2 = [3, 4, 9, 10],
+		tileGroup3 = [5, 6, 11, 12];
+
+		//show tile in modal and add hover effect 
+		var hover = function(tileIds){
+			//tile hover
+			$elem.find('.tile' + tileId).addClass('hover');
+			for(var i = 0; i < tileIds.length; i++ ) {
+				var tileId = tileIds[i];
+				$elem.find('.tile' + tileId).addClass('hover');
+			}
+			// Show/hide zoom in icon on desktop only.
+			if ($('html').hasClass('desktop-view')) {
+				if (tileGroup1 === tileIds) {
+		        	$('#zoom-in-icon1').show();
+		        	$('#zoom-in-icon2').hide();
+		        	$('#zoom-in-icon3').hide();
+				} else if (tileGroup2 === tileIds) {
+					$('#zoom-in-icon1').hide();
+		        	$('#zoom-in-icon2').show();
+		        	$('#zoom-in-icon3').hide();
+				} else if (tileGroup3 === tileIds) {
+					$('#zoom-in-icon1').hide();
+		        	$('#zoom-in-icon2').hide();
+		        	$('#zoom-in-icon3').show();
+				}
+			}
+
+		}
+
+		var unHover = function(tileIds){
+			for(var i = 0; i < tileIds.length; i++ ) {
+				var tileId = tileIds[i];
+				$elem.find('.tile' + tileId).removeClass('hover');
+			}
+
+			if ($('html').hasClass('desktop-view')) {
+	        	$('#zoom-in-icon1').hide();
+	        	$('#zoom-in-icon2').hide();
+	        	$('#zoom-in-icon3').hide();
+			}
+		}
+
 	    for (var i = 1; i <= 12; i++) {
-	    	if (i == 1 || i == 2 || i == 7 || i == 8) {
+	    	if (tileGroup1.includes(i)) {
 		        $elem.find('.tile' + i).click(function(){
 		            showModal('tile-modal-1');
+		        });
+		        $elem.find('.tile' + i).hover(function(){
+		            hover(tileGroup1);
+		        }, function(){
+		        	unHover(tileGroup1);
 		        });	    		
 	    	}
-	    	if (i == 3 || i == 4 || i == 9 || i == 10) {
+
+	    	if (tileGroup2.includes(i)) {
 		        $elem.find('.tile' + i).click(function(){
 		            showModal('tile-modal-2');
-		        });	    		
+		        });
+		        $elem.find('.tile' + i).hover(function(){
+		            hover(tileGroup2);
+		        }, function(){
+		        	unHover(tileGroup2);
+		        });		        
 	    	}
-	    	if (i == 5 || i == 6 || i == 11 || i == 12) {
+	    	if (tileGroup3.includes(i)) {
 		        $elem.find('.tile' + i).click(function(){
 		            showModal('tile-modal-3');
-		        });	    		
+		        });
+		        $elem.find('.tile' + i).hover(function(){
+		            hover(tileGroup3);
+		        }, function(){
+		        	unHover(tileGroup3);
+		        });	 		        
 	    	}
 	    }
 	});
