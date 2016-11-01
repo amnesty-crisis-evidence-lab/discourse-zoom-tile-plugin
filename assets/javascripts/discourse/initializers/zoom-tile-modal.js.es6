@@ -56,18 +56,27 @@ function initializeModal(api) {
         }, function(){
             unHover(tileGroup1);
         });
+        $elem.find('.tile1, .tile2, .tile7, .tile8').click(function(){
+            showModal('tile-modal-1');
+        });
 
         $elem.find('.tile3, .tile4, .tile9, .tile10, #zoom-in-icon2').hover(function(){
             hover(tileGroup2);
         }, function(){
             unHover(tileGroup2);
         });
+        $elem.find('.tile3, .tile4, .tile9, .tile10').click(function(){
+            showModal('tile-modal-2');
+        })
 
         $elem.find('.tile5, .tile6, .tile11, .tile12, #zoom-in-icon3').hover(function(){
             hover(tileGroup3);
         }, function(){
             unHover(tileGroup3);
         });
+        $elem.find('.tile5, .tile6, .tile11, .tile12').click(function(){
+            showModal('tile-modal-3');
+        })
     });
 }
 
