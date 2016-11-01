@@ -7,7 +7,7 @@ function initializeModal(api) {
         //use css in discourse admin to put this icon on tile images
         $elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon1" aria-hidden="true" style="display:none"></i>');
         $elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon2" aria-hidden="true" style="display:none"></i>');
-        $elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon3" aria-hidden="true" style="display:none"></i>');
+        $elem.find('.tile1').parent().append('<i class="fa fa-search-plus" id="zoom-in-icon3" aria-hidden="true"></i>');
 
         var tileGroup1 = [1, 2, 7, 8],
         tileGroup2 = [3, 4, 9, 10],
